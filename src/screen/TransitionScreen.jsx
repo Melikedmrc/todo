@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function Transition() {
   return (
-    <View>
-      <Text>Transition</Text>
+    <View className="flex-1 items-center justify-center">
+      <Text className="items-center justify-center">Transition</Text>
     </View>
   )
 }

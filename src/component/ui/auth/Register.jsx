@@ -1,5 +1,6 @@
 import React from 'react'
 import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import { Input, Button, Or, SocialAuthButtons, BottomTabs } from '../shared/sharedImport';
 import { registerForm } from "../../../utils/authForms";
 
@@ -7,6 +8,7 @@ const LoginBackground = require('../../../../assets/login.png');
 
 
 export default function Register({navigation}) {
+  const navigate = useNavigate();
   return (
     <View className="flex-1">
     <ImageBackground
@@ -52,7 +54,7 @@ export default function Register({navigation}) {
           </View>
 
           <View>
-            <Button title="Register" onPress={() => navigation.navigate('Contract')} />
+            <Button title="Register" onPress={() => navigate('/contract')} />
           </View>
         </View>
       </KeyboardAvoidingView>

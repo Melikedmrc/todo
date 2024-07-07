@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 import Login from "../component/ui/auth/Login";
-import {View} from 'react-native';
+import { View } from 'react-native';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
   return (
-      <Login navigation={navigation}/>
-  )
+    <View className="flex-1">
+      <Login />
+    </View>
+  );
 }

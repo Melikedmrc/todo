@@ -2,9 +2,12 @@ import { View } from 'react-native'
 import React from 'react'
 import Register from "../component/ui/auth/Register";
 
-export default function RegisterScreen({navigation}) {
+export default function RegisterScreen() {
   return (
-      <Register navigation={navigation}/>
+    <View className="flex-1">
+      <Register />
+    </View>
+      
    
   )
 }
