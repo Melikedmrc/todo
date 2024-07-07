@@ -1,34 +1,41 @@
-export const loginForm=[
+export const loginForm = [
     {
-        id:1,
-        placeholder: "E-mail"
+      id: 1,
+      placeholder: "E-mail",
+      secureTextEntry: false
     },
     {
-        id:2,
-        placeholder:"Password"
+      id: 2,
+      placeholder: "Password",
+      secureTextEntry: true
     }
-];
-
-export const registerForm=[
+  ];
+  
+  export const registerForm = [
     {
-        id:1,
-        placeholder: "Name"
+      id: 1,
+      placeholder: "Name",
+      secureTextEntry: false
     },
     {
-        id:2,
-        placeholder:"Surname"
+      id: 2,
+      placeholder: "Surname",
+      secureTextEntry: false
     },
     {
-        id:3,
-        placeholder: "E-mail"
+      id: 3,
+      placeholder: "E-mail",
+      secureTextEntry: false
     },
     {
-        id:4,
-        placeholder:"Password"
+      id: 4,
+      placeholder: "Password",
+      secureTextEntry: true
     },
     {
-        id:5,
-        placeholder:"Password"
-    },
-    
-];
+      id: 5,
+      placeholder: "Password",
+      secureTextEntry: true
+    }
+  ];
+  

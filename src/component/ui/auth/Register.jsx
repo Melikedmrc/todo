@@ -41,7 +41,10 @@ export default function Register({navigation}) {
               data={registerForm}
               renderItem={({ item }) => (
                 <View className="w-full mt-4 mb-2">
-                  <Input placeholder={item.placeholder} />
+                  <Input 
+                  placeholder={item.placeholder}
+                  secureTextEntry={item.secureTextEntry}
+                  />
                 </View>
               )}
               keyExtractor={item => item.id}

@@ -24,7 +24,7 @@ export default function Login({ navigation }) {
               </Text>
 
               <Text className="text-lg text-{#1D2220} mb-4" style={{ textAlign: 'center' }}>
-                Welcome back! Sign in using your social account or email to continue us
+                Welcome back! Sign in using your social account or email to continue ussss
               </Text>
 
             </View>
@@ -42,7 +42,10 @@ export default function Login({ navigation }) {
                 data={loginForm}
                 renderItem={({ item }) => (
                   <View className="w-full mt-4 mb-2">
-                    <Input placeholder={item.placeholder} />
+                    <Input
+                      placeholder={item.placeholder}
+                      secureTextEntry={item.secureTextEntry}
+                    />
                   </View>
                 )}
                 keyExtractor={item => item.id}
