@@ -1,9 +1,10 @@
 import React from 'react';
 import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList } from 'react-native';
-import { Input, Button, Or, SocialAuthButtons, BottomTabs } from '../shared/sharedImport';
+import { Input, Button, Or, SocialAuthButtons, BottomTabs} from '../shared/sharedImport';
 import { loginForm } from '../../../utils/authForms';
 import { useForm, Controller } from 'react-hook-form';// 1. React Hook Form'dan gerekli bileşenleri eklendi
-import { useNavigation } from '@react-navigation/native'; 
+import { NavigationContainer, useNavigation } from '@react-navigation/native'; 
+
 
 const LoginBackground = require('../../../../assets/login.png');
 
@@ -69,9 +70,7 @@ export default function Login() {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-      {/* <BottomTabs/>  */}
-      
-      
+      <BottomTabs />
     </View>
   );
 }

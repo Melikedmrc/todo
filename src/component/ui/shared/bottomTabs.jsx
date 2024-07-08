@@ -1,40 +1,18 @@
-// import { useRouter } from "expo-router";
-import React from "react";
-import { TouchableOpacity, View , Text} from "react-native";
-import { CalendarScreen, TodoScreen, ProfileScreen, LoginScreen } from "../../../screen/ScreenImport";
-// import { useNavigate } from 'react-router-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-const Tab = createBottomTabNavigator();
 export default function BottomTabs() {
-  
-  // const navigate = useNavigate();
   return (
-    // <View>
-    //   <View className="w-24 justify-center items-center -top-6">
-    //     <TouchableOpacity
-    //        onPress={() => navigate('/calendar')}
-    //     >
-    //       <Text>calendar</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    //   <View className="w-24 justify-center items-center -top-6">
-    //     <TouchableOpacity onPress={() => navigate('/todo')}>
-    //       <Text>todo</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    //   <View className="w-24 justify-center items-center -top-6">
-    //     <TouchableOpacity onPress={() => navigate('/profile')}>
-    //     <Text>profile</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    // </View>
-      <Tab.Navigator initialRouteName="login">
-        <Tab.Screen name="login" component={LoginScreen}/>
-        <Tab.Screen name="calendar" component={CalendarScreen}/>
-        <Tab.Screen name="todo" component={TodoScreen}/>
-        <Tab.Screen name="profile" component={ProfileScreen}/>
-      </Tab.Navigator>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10, backgroundColor: '#fff' }}>
+      <TouchableOpacity>
+        <Text>Calendar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text>Todo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text>Profile</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
- 

@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen, LoginScreen, RegisterScreen, TransitionScreen, ContractScreen } from './src/screen/ScreenImport';
 import { NavigationContainer } from '@react-navigation/native';
+import BottomTabs from './src/component/ui/shared/bottomTabs';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,9 @@ export default function App() {
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Contract" component={ContractScreen} options={{ headerShown: true }} />
         <Stack.Screen name="Transition" component={TransitionScreen} options={{ headerShown: true }} />
+        <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }
