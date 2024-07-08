@@ -34,7 +34,7 @@ export const loginForm = [
     },
     {
       id: 5,
-      placeholder: "Password",
+      placeholder: "Password confirm",
       secureTextEntry: true
     }
   ];

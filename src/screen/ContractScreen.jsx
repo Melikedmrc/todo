@@ -1,13 +1,12 @@
 import { StyleSheet, Button, View } from 'react-native'
 import React from 'react'
-import { useNavigate } from 'react-router-native';
+import { useNavigation } from '@react-navigation/native'; 
 
-export default function ContractScreen({ navigation }) {
-  const navigate = useNavigate();
-
+export default function ContractScreen() {
+  const navigation = useNavigation();
   return (
     <View className="flex-1 items-center justify-center">
-      <Button title='transition' onPress={() => navigate('/transition')}>
+      <Button title='transition'  onPress={() => navigation.navigate('Transition')} >
 
       </Button>
     </View>

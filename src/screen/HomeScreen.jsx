@@ -1,12 +1,11 @@
 import React from 'react';
 import { Text, View, ImageBackground, TouchableOpacity } from 'react-native';
-import { useNavigate } from 'react-router-native';
 import { Input, Button, Or, SocialAuthButtons } from '../component/ui/shared/sharedImport';
 
 const backgroundImage = require('../../assets/bg.png');
 
-export default function HomeScreen() {
-  const navigate = useNavigate();
+export default function HomeScreen({ navigation }) {
+
 
   return (
     <ImageBackground
@@ -22,8 +21,8 @@ export default function HomeScreen() {
           <Text style={{ fontSize: 18, alignItems: 'left', top: 95 }}>your tasks, your rules, our support</Text>
         </View>
         <View style={{ flex: 6, justifyContent: 'center', alignItems: 'center' }}>
-          <Button title="Login" onPress={() => navigate('/login')} />
-          <TouchableOpacity onPress={() => navigate('/register')}>
+        <Button title="Login" onPress={() => navigation.navigate('Login')} />
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text>Create an account</Text>
           </TouchableOpacity>
           <Or />
