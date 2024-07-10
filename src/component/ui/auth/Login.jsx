@@ -76,8 +76,9 @@ export default function Login() {
             </View>
           </View>
         </KeyboardAvoidingView>
+        <BottomTabs isLogin={isLogin} />
       </ImageBackground>
-      <BottomTabs isLogin={isLogin} />
+      
       
     </View>
   );

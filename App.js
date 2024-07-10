@@ -13,7 +13,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Contract" component={ContractScreen} options={{ headerShown: true }} />
+        <Stack.Screen name="Contract" component={ContractScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Transition" component={TransitionScreen} options={{ headerShown: true }} />
         <Stack.Screen name="Calendar" component={CalendarScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Todo" component={TodoScreen} options={{ headerShown: true }} />

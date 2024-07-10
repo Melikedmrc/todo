@@ -10,8 +10,10 @@ module.exports = {
       'Input': '#FDFDFD',
       'Placeholder': '#1E1C1C80',
       'Title': '#C67ED2',
+      'BottomNav': '#C67ED2',
       'Button': '#F6F6F6',
       },
+
     },
   },
   plugins: [],
