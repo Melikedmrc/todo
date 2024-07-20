@@ -4,7 +4,7 @@ import { Input, Button, Or, SocialAuthButtons, BottomTabs} from '../shared/share
 import { loginForm } from '../../../utils/authForms';
 import { useForm, Controller } from 'react-hook-form';// 1. React Hook Form'dan gerekli bileşenleri eklendi
 import { NavigationContainer, useNavigation } from '@react-navigation/native'; 
-import { signInWithEmailAndPasswordAsync } from '../../../firebase/firebaseLoginAuth';
+import { auth, signInWithEmail } from '../../../firebase/firebaseConfig';
 
 const LoginBackground = require('../../../../assets/login.png');
 
@@ -15,11 +15,15 @@ export default function Login() {
   
   const onSubmit = async (data) => {
     try {
-      const user = await signInWithEmailAndPasswordAsync(data.email, data.password);
-      console.log('User logged in:', JSON.stringify(user, null, 2));
+      const user = await signInWithEmail(data.email, data.password);
+      if (user && user.email) {
+        console.log('Kullanıcı e-posta adresi:', user.email);
+      } else {
+        console.log('Kullanıcı bilgileri mevcut değil.');
+      }
       navigation.navigate('Transition');
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error('Giriş hatası:', error.message); // Hata mesajını daha ayrıntılı göster
     }
   };
   const isLogin = false;

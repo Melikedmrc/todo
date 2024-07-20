@@ -1,8 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  initializeAuth,
+  getReactNativePersistence
+} from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getFirestore } from 'firebase/firestore';
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdrsqxTbuWq9oy5lKJBKv3Vm_F8N4COTw",
@@ -14,12 +19,38 @@ const firebaseConfig = {
   measurementId: "G-VK5RB10CMY"
 };
 
-// Initialize Firebase
+// Firebase'i başlat
 const app = initializeApp(firebaseConfig);
-const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage)
-});
+const analytics = getAnalytics(app);
 
-const db = getFirestore(app);
-export { app, auth, db };
+// Auth'ı başlat ve AsyncStorage kullan
+const auth = getAuth(app); // Firebase Auth'ı almak için sadece getAuth kullanılır
 
+export const signInWithEmail = async(email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    return user; 
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log('Hata: ', errorCode, errorMessage);
+    throw error; // Hata fırlat
+  }
+}
+
+export const createUserWithEmail = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    return user;
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log('Hata Kod:', errorCode);
+    console.log('Hata Mesajı:', errorMessage);
+    // Daha fazla bilgi için error nesnesini detaylı şekilde loglayabilirsiniz
+    console.log('Hata Detayları:', error);
+    throw error;
+  }
+}
