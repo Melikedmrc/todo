@@ -1,20 +1,40 @@
-import React from 'react';
-import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList, Alert } from 'react-native';
 import { Input, Button, Or, SocialAuthButtons } from '../shared/sharedImport';
 import { registerForm } from "../../../utils/authForms";
-import { useForm, Controller } from 'react-hook-form';
+import { createUserWithEmail } from '../../../firebase/firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 
 const LoginBackground = require('../../../../assets/login.png');
 
 export default function Register() {
-  const { control, handleSubmit } = useForm();
+  const [formData, setFormData] = useState({});
   const navigation = useNavigation();
 
+  const handleInputChange = (name, value) => {
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
 
-  const onSubmit = data => {
-    console.log(data);
-    navigation.navigate('Contract');
+  const onSubmit = async () => {
+    console.log('Form Verileri:', formData); // Verilerin doğru geldiğinden emin olun
+
+    const email = formData['e-mail'] || ''; // 'e-mail' yerine 'email' kullanılabilir
+    const password = formData['password'] || ''; // 'password' için de aynı durum
+
+    if (!email || !password) {
+      Alert.alert('Hata', 'E-posta veya şifre boş olamaz.');
+      return;
+    }
+
+    try {
+      const user = await createUserWithEmail(email, password);
+      console.log('Kullanıcı oluşturuldu:', user);
+      Alert.alert('Başarı', 'Kayıt işlemi başarılı!');
+      navigation.navigate('Contract');
+    } catch (error) {
+      Alert.alert('Hata', 'Kayıt işlemi sırasında bir hata oluştu.');
+      console.log('Hata: ', error);
+    }
   };
 
   return (
@@ -43,19 +63,11 @@ export default function Register() {
                 data={registerForm}
                 renderItem={({ item }) => (
                   <View className="w-full mt-4 mb-2">
-                    <Controller
-                      control={control}
-                      name={item.placeholder.toLowerCase()}
-                      defaultValue=""
-                      render={({ field: { onChange, onBlur, value } }) => (
-                        <Input
-                          placeholder={item.placeholder}
-                          secureTextEntry={item.secureTextEntry}
-                          onChangeText={onChange}
-                          onBlur={onBlur}
-                          value={value}
-                        />
-                      )}
+                    <Input
+                      placeholder={item.placeholder}
+                      secureTextEntry={item.secureTextEntry}
+                      onChangeText={(value) => handleInputChange(item.placeholder.toLowerCase(), value)}
+                      value={formData[item.placeholder.toLowerCase()] || ''}
                     />
                   </View>
                 )}
@@ -63,7 +75,7 @@ export default function Register() {
               />
             </View>
             <View>
-              <Button title="Register" onPress={handleSubmit(onSubmit)} />
+              <Button title="Register" onPress={onSubmit} />
             </View>
           </View>
         </KeyboardAvoidingView>
