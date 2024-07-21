@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen, LoginScreen, RegisterScreen, TransitionScreen, ContractScreen, CalendarScreen, TodoScreen, ProfileScreen, SuggestionScreen } from './src/screen/ScreenImport';
+import { HomeScreen, LoginScreen, RegisterScreen, TransitionScreen, ContractScreen, CalendarScreen, TodoScreen, ProfileScreen, SuggestionScreen ,NewTaskScreen } from './src/screen/ScreenImport';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { Provider } from 'react-redux';
@@ -24,6 +24,7 @@ export default function App() {
         <Stack.Screen name="Todo" component={TodoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Suggestion" component={SuggestionScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="NewTask" component={NewTaskScreen} options={{ headerShown: false }} />  
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>

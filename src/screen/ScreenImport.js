@@ -7,6 +7,7 @@ import TodoScreen from "./TodoScreen";
 import ProfileScreen from "./ProfileScreen";
 import ContractScreen from "./ContractScreen";
 import SuggestionScreen  from "./SuggestionScreen";
+import NewTaskScreen from "./NewTaskScreen";
 
 export{
   HomeScreen,
@@ -17,5 +18,6 @@ export{
   TodoScreen,
   ProfileScreen,
   ContractScreen,
-  SuggestionScreen
+  SuggestionScreen,
+  NewTaskScreen
 }

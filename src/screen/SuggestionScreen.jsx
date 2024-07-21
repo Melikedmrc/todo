@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { addTask } from '../Redux/todoSlice';
+// import { useDispatch } from 'react-redux';
+// import { addTodo, removeTodo  } from '../Redux/todosSlice';
 import { useNavigation } from '@react-navigation/native';
 import BottomTabs from "../component/ui/shared/bottomTabs";
 import Button from "../component/ui/shared/button";
@@ -34,13 +34,18 @@ const suggestions = [
 ];
 
 export default function SuggestionScreen() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const handleAddTask = (task) => {
-    dispatch(addTask(task));
-    navigation.navigate('Todo');
+  // const handleAddTask = (task) => {
+  //   // dispatch(addTask(task));
+  //   // navigation.navigate('Todo');
+  // };
+
+  const handleNewTask = () => {
+    navigation.navigate('NewTask'); // 'NewTask' adlı ekrana navigasyon yapıyoruz.
   };
+ 
 
   return (
     <View className="flex-1">
@@ -60,7 +65,7 @@ export default function SuggestionScreen() {
               <Text className={`rounded-md text-base w-5/6 h-12 p-3 ${task.color}`}>{task.text}</Text>
               <TouchableOpacity
                 className="bg-gray-300 m-2 h-9 w-9 rounded-2xl items-center justify-center"
-                onPress={() => handleAddTask(task)}
+                // onPress={() => handleAddTask(task)}
               >
                 <Text className="text-black text-xl">+</Text>
               </TouchableOpacity>
@@ -70,7 +75,7 @@ export default function SuggestionScreen() {
       ))}
 
       <View className="flex items-center justify-center -bottom-1">
-        <Button title="Add More" />
+        <Button title="Add More" onPress={handleNewTask} />
       </View>
 
       <View className="absolute bottom-0 w-full">

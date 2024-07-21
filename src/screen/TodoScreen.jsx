@@ -1,8 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Text, View, FlatList, Dimensions, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import BottomTabs from '../component/ui/shared/bottomTabs';
 import { SuggestionButton } from "../component/ui/shared/button";
+import Button from "../component/ui/shared/button";
+import { useDispatch ,useSelector} from "react-redux";
+import { removeTodo } from "../Redux/todosSlice";
+
 
 const backgroundImage = require('../../assets/todoBackground.png'); 
 
@@ -24,9 +27,14 @@ const getCurrentWeek = () => {
 const screenWidth = Dimensions.get('window').width;
 
 export default function TodoScreen() {
-  const tasks = useSelector((state) => state.tasks);
+  const todos = useSelector((state) => state.todos.todos); // Redux store'dan todos listesini çekiyoruz.
   const weekDays = getCurrentWeek();
   const itemWidth = screenWidth / 9;
+  const dispatch = useDispatch();  
+
+  const handleRemoveTodo = (id) => {
+    dispatch(removeTodo(id)); // Belirtilen id'ye sahip todo'yu siliyoruz.
+};
 
   return (
     <View className="flex-1 flex-col h-full w-full">
@@ -51,25 +59,8 @@ export default function TodoScreen() {
         />
       </View>
       
-        {/* <FlatList
-          data={tasks}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View className="flex-row justify-between items-center p-4 bg-white m-2 rounded-lg">
-              <Text className="text-black">{item}</Text>
-            </View>
-          )}
-        /> */}
-
-<ImageBackground 
-      source={backgroundImage} 
-      className="items-center justify-center"
-      resizeMode='contain'
-      style={{ flex: 1 }} // Arka plan resminin View'ı kaplaması için flex: 1 kullanıyoruz
-    >
       <View className="flex-1">  
-
-      <View className="flex-row justify-center my-4">
+        <View className="flex-row justify-center my-4">
           <TouchableOpacity className="bg-slate-300 px-6 py-2.5  rounded-xl">
             <Text className="text-zinc-400">All</Text>
           </TouchableOpacity>
@@ -80,12 +71,21 @@ export default function TodoScreen() {
             <Text className="text-zinc-400">Study Routine</Text>
           </TouchableOpacity>
         </View>
-
-        <View className="absolute right-4 bottom-20 mb-3 ">
+        <FlatList
+          data={todos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View className="flex-row justify-between items-center p-4 bg-white m-2 rounded-lg">
+              <Text className="text-black">{item.text}</Text>
+              <Text className="text-gray-600">{item.descripe}</Text>
+              <Button title="Remove" onPress={() => handleRemoveTodo(item.id)} />
+            </View>
+          )}
+        />
+        <View className="absolute right-4 bottom-20 mb-3">
           <SuggestionButton onPress={() => console.log('Button Pressed')} />
         </View>
       </View>
-      </ImageBackground>
       <View className="absolute bottom-0 w-full">
         <BottomTabs isLogin={false} />
       </View>

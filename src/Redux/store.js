@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import todoReducer from './todoSlice';
+import { configureStore } from '@reduxjs/toolkit';  // Redux Toolkit'ten configureStore fonksiyonunu içe aktarıyoruz.
+import todosReducer from './todosSlice';              // Todo slice'ını içe aktarıyoruz.
 
 const store = configureStore({
   reducer: {
-    todos: todoReducer,
+    todos: todosReducer,
   },
 });
 
 export default store;
+
