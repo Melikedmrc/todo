@@ -1,74 +1,93 @@
 import React from 'react';
-import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
+import { Text, View, FlatList, Dimensions, TouchableOpacity, ImageBackground } from 'react-native';
 import BottomTabs from '../component/ui/shared/bottomTabs';
+import { SuggestionButton } from "../component/ui/shared/button";
 
-// Haftanın günlerini ve tarihlerini almak için fonksiyon
+const backgroundImage = require('../../assets/todoBackground.png'); 
+
 const getCurrentWeek = () => {
   const today = new Date();
-  const currentDay = today.getDay(); // Mevcut günün indeksi (0 = Pazar, 1 = Pazartesi, vb.)
+  const currentDay = today.getDay();
   const weekDays = [];
-
-  // Haftanın başlangıç günü olarak mevcut günün olduğu haftayı alıyoruz
   for (let i = 0; i < 7; i++) {
     const dayOffset = i - currentDay;
     const date = new Date(today);
     date.setDate(today.getDate() + dayOffset);
-
-    // Gün adı ve günün tarihi
     const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-    const dayOfMonth = date.getDate(); // Ayın günü
-
+    const dayOfMonth = date.getDate();
     weekDays.push({ dayName, dayOfMonth });
   }
-
   return weekDays;
 };
 
-// Ekran genişliğini al
 const screenWidth = Dimensions.get('window').width;
 
 export default function TodoScreen() {
+  const tasks = useSelector((state) => state.tasks);
   const weekDays = getCurrentWeek();
-  const itemWidth = screenWidth / 8; // 7 gün, ekran genişliğine bölünmüş
+  const itemWidth = screenWidth / 9;
 
   return (
-    <View className="flex-1 flex-col h-full">
-       <View className="bg-purple-300 py-4">
+    <View className="flex-1 flex-col h-full w-full">
+      <View className="bg-purple-300 items-center py-4">
         <Text className="text-lg font-bold text-black text-center mt-6 mb-2">Today</Text>
         <FlatList
           horizontal
           data={weekDays}
           keyExtractor={(item) => item.dayOfMonth.toString()}
           contentContainerStyle={{ alignItems: 'center', paddingHorizontal: 0 }}
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View
-              style={{ width: itemWidth }}
-              className="items-center p-2 bg-fuchsia-200 rounded-xl mx-1"
-            >
-              <Text className="text-black text-base">{item.dayName}</Text>
-              <Text className="text-black text-center mt-1.5 py-1 text-base bg-white h-8 w-8 rounded-3xl">{item.dayOfMonth}</Text>
-            </View>
+            <TouchableOpacity>
+              <View style={{ width: itemWidth }} className="items-center bg-fuchsia-200 rounded-xl m-1 py-2">
+                <Text className="text-black text-base">{item.dayName}</Text>
+                <Text className="text-black text-center mt-1.5 py-1 text-base bg-white h-8 w-8 rounded-3xl">
+                  {item.dayOfMonth}
+                </Text>
+              </View>
+            </TouchableOpacity>
           )}
         />
       </View>
+      
+        {/* <FlatList
+          data={tasks}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View className="flex-row justify-between items-center p-4 bg-white m-2 rounded-lg">
+              <Text className="text-black">{item}</Text>
+            </View>
+          )}
+        /> */}
+
+<ImageBackground 
+      source={backgroundImage} 
+      className="items-center justify-center"
+      resizeMode='contain'
+      style={{ flex: 1 }} // Arka plan resminin View'ı kaplaması için flex: 1 kullanıyoruz
+    >
+      <View className="flex-1">  
 
       <View className="flex-row justify-center my-4">
-        <TouchableOpacity className="bg-slate-300 px-6 py-2.5  rounded-xl">
-          <Text className="text-zinc-400">All</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="bg-slate-300 px-3 py-2.5 mx-1 rounded-xl">
-          <Text className="text-zinc-400">Daily Routine</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="bg-slate-300 px-2 py-2.5  rounded-xl">
-          <Text className="text-zinc-400">Study Routine</Text>
-        </TouchableOpacity>
+          <TouchableOpacity className="bg-slate-300 px-6 py-2.5  rounded-xl">
+            <Text className="text-zinc-400">All</Text>
+          </TouchableOpacity>
+          <TouchableOpacity className="bg-slate-300 px-3 py-2.5 mx-1 rounded-xl">
+            <Text className="text-zinc-400">Daily Routine</Text>
+          </TouchableOpacity>
+          <TouchableOpacity className="bg-slate-300 px-2 py-2.5  rounded-xl">
+            <Text className="text-zinc-400">Study Routine</Text>
+          </TouchableOpacity>
+        </View>
 
-        
+        <View className="absolute right-4 bottom-20 mb-3 ">
+          <SuggestionButton onPress={() => console.log('Button Pressed')} />
+        </View>
       </View>
-
-
+      </ImageBackground>
       <View className="absolute bottom-0 w-full">
-        <BottomTabs />
+        <BottomTabs isLogin={false} />
       </View>
     </View>
   );

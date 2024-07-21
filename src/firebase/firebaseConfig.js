@@ -9,6 +9,8 @@ import {
 } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+
 const firebaseConfig = {
   apiKey: "AIzaSyBdrsqxTbuWq9oy5lKJBKv3Vm_F8N4COTw",
   authDomain: "todo-d2686.firebaseapp.com",
@@ -26,6 +28,11 @@ const analytics = getAnalytics(app);
 // Auth'ı başlat ve AsyncStorage kullan
 const auth = getAuth(app); // Firebase Auth'ı almak için sadece getAuth kullanılır
 
+// Firestore'u başlat
+const db = getFirestore(app);
+
+
+// Email ile giriş yapma fonksiyonu
 export const signInWithEmail = async(email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -39,6 +46,8 @@ export const signInWithEmail = async(email, password) => {
   }
 }
 
+
+// Email ile kullanıcı oluşturma fonksiyonu
 export const createUserWithEmail = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -54,3 +63,6 @@ export const createUserWithEmail = async (email, password) => {
     throw error;
   }
 }
+
+
+export { db, collection, addDoc, getDocs };

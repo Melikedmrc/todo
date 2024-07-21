@@ -1,5 +1,6 @@
 import { TouchableOpacity, Text } from 'react-native';
 import { styled } from 'nativewind';
+import { useNavigation } from '@react-navigation/native'; 
 
 
 const Button = ({ title, onPress, style, textStyle }) => {
@@ -11,3 +12,17 @@ const Button = ({ title, onPress, style, textStyle }) => {
 };
 
 export default Button;
+
+export const SuggestionButton = ({ onPress }) => {
+
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Suggestion')} 
+      className="bg-white w-12 h-12 rounded-full items-center justify-center "
+    >
+      <Text className="text-black text-xl">+</Text>
+    </TouchableOpacity>
+  );
+};

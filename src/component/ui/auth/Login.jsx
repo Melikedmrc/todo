@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList } from 'react-native';
-import { Input, Button, Or, SocialAuthButtons, BottomTabs} from '../shared/sharedImport';
+import { Input, Button, Or, SocialAuthButtons} from '../shared/sharedImport';
+import  BottomTabs  from "../shared/bottomTabs";
 import { loginForm } from '../../../utils/authForms';
 import { useForm, Controller } from 'react-hook-form';// 1. React Hook Form'dan gerekli bileşenleri eklendi
 import { NavigationContainer, useNavigation } from '@react-navigation/native'; 
@@ -26,7 +27,6 @@ export default function Login() {
       console.error('Giriş hatası:', error.message); // Hata mesajını daha ayrıntılı göster
     }
   };
-  const isLogin = false;
 
   return (
     <View className="flex-1">
@@ -80,7 +80,7 @@ export default function Login() {
             </View>
           </View>
         </KeyboardAvoidingView>
-        <BottomTabs isLogin={isLogin} />
+        <BottomTabs isLogin={true} />
       </ImageBackground>
       
       

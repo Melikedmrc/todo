@@ -6,6 +6,7 @@ import CalendarScreen from "./CalendarScreen";
 import TodoScreen from "./TodoScreen";
 import ProfileScreen from "./ProfileScreen";
 import ContractScreen from "./ContractScreen";
+import SuggestionScreen  from "./SuggestionScreen";
 
 export{
   HomeScreen,
@@ -15,5 +16,6 @@ export{
   CalendarScreen,
   TodoScreen,
   ProfileScreen,
-  ContractScreen
+  ContractScreen,
+  SuggestionScreen
 }
