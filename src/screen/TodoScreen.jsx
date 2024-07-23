@@ -3,11 +3,8 @@ import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native
 import BottomTabs from '../component/ui/shared/bottomTabs';
 import { SuggestionButton } from "../component/ui/shared/button";
 import Button from "../component/ui/shared/button";
-import { useDispatch ,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeTodo } from "../Redux/todosSlice";
-
-
-const backgroundImage = require('../../assets/todoBackground.png'); 
 
 const getCurrentWeek = () => {
   const today = new Date();
@@ -30,11 +27,11 @@ export default function TodoScreen() {
   const todos = useSelector((state) => state.todos.todos); // Redux store'dan todos listesini çekiyoruz.
   const weekDays = getCurrentWeek();
   const itemWidth = screenWidth / 9;
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
 
   const handleRemoveTodo = (id) => {
     dispatch(removeTodo(id)); // Belirtilen id'ye sahip todo'yu siliyoruz.
-};
+  };
 
   return (
     <View className="flex-1 flex-col h-full w-full">
@@ -61,13 +58,13 @@ export default function TodoScreen() {
       
       <View className="flex-1">  
         <View className="flex-row justify-center my-4">
-          <TouchableOpacity className="bg-slate-300 px-6 py-2.5  rounded-xl">
+          <TouchableOpacity className="bg-slate-300 px-6 py-2.5 rounded-xl">
             <Text className="text-zinc-400">All</Text>
           </TouchableOpacity>
           <TouchableOpacity className="bg-slate-300 px-3 py-2.5 mx-1 rounded-xl">
             <Text className="text-zinc-400">Daily Routine</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-slate-300 px-2 py-2.5  rounded-xl">
+          <TouchableOpacity className="bg-slate-300 px-2 py-2.5 rounded-xl">
             <Text className="text-zinc-400">Study Routine</Text>
           </TouchableOpacity>
         </View>
@@ -75,7 +72,7 @@ export default function TodoScreen() {
           data={todos}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <View className="flex-row justify-between items-center p-4 bg-white m-2 rounded-lg">
+            <View className="flex-row justify-between items-center p-4 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
               <Text className="text-black">{item.text}</Text>
               <Text className="text-gray-600">{item.descripe}</Text>
               <Button title="Remove" onPress={() => handleRemoveTodo(item.id)} />
