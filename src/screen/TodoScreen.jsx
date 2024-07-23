@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import BottomTabs from '../component/ui/shared/bottomTabs';
-import { SuggestionButton } from "../component/ui/shared/button";
-import Button from "../component/ui/shared/button";
+import { SuggestionButton, SelectedButton, RemoveButton } from "../component/ui/shared/button";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTodo } from "../Redux/todosSlice";
 
@@ -28,9 +27,15 @@ export default function TodoScreen() {
   const weekDays = getCurrentWeek();
   const itemWidth = screenWidth / 9;
   const dispatch = useDispatch();
+  const [selectedTodoId, setSelectedTodoId] = useState(null);
 
   const handleRemoveTodo = (id) => {
     dispatch(removeTodo(id)); // Belirtilen id'ye sahip todo'yu siliyoruz.
+  };
+
+  const handleButtonPress = (id) => {
+    // Seçili todo'nun id'sini güncelle veya temizle
+    setSelectedTodoId((prevSelectedTodoId) => (prevSelectedTodoId === id ? null : id));
   };
 
   return (
@@ -73,9 +78,21 @@ export default function TodoScreen() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View className="flex-row justify-between items-center p-4 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
-              <Text className="text-black">{item.text}</Text>
-              <Text className="text-gray-600">{item.descripe}</Text>
-              <Button title="Remove" onPress={() => handleRemoveTodo(item.id)} />
+              <View className="flex-col">
+                <Text className="font-semibold text-black pb-1">{item.text}</Text>
+                <Text style={{ textDecorationLine: selectedTodoId === item.id ? 'line-through' : 'none', color: '#6B7280' }}>
+                  {item.descripe}
+                </Text>
+              </View>
+              
+              <View className="flex-row ">
+                <SelectedButton 
+                  onPress={() => handleButtonPress(item.id)} 
+                  isSelected={selectedTodoId === item.id}
+                />
+                <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />  
+              </View>
+              
             </View>
           )}
         />
