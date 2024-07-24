@@ -23,19 +23,22 @@ const getCurrentWeek = () => {
 const screenWidth = Dimensions.get('window').width;
 
 export default function TodoScreen() {
-  const todos = useSelector((state) => state.todos.todos); // Redux store'dan todos listesini çekiyoruz.
+  const todos = useSelector((state) => state.todos.todos);
   const weekDays = getCurrentWeek();
   const itemWidth = screenWidth / 9;
   const dispatch = useDispatch();
-  const [selectedTodoId, setSelectedTodoId] = useState(null);
+  const [selectedTodoIds, setSelectedTodoIds] = useState([]);
 
   const handleRemoveTodo = (id) => {
-    dispatch(removeTodo(id)); // Belirtilen id'ye sahip todo'yu siliyoruz.
+    dispatch(removeTodo(id));
   };
 
   const handleButtonPress = (id) => {
-    // Seçili todo'nun id'sini güncelle veya temizle
-    setSelectedTodoId((prevSelectedTodoId) => (prevSelectedTodoId === id ? null : id));
+    setSelectedTodoIds((prevSelectedTodoIds) =>
+      prevSelectedTodoIds.includes(id)
+        ? prevSelectedTodoIds.filter(todoId => todoId !== id)
+        : [...prevSelectedTodoIds, id]
+    );
   };
 
   return (
@@ -78,9 +81,12 @@ export default function TodoScreen() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View className="flex-row justify-between items-center p-4 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
-              <View className="flex-col">
-                <Text className="font-semibold text-black pb-1">{item.text}</Text>
-                <Text style={{ textDecorationLine: selectedTodoId === item.id ? 'line-through' : 'none', color: '#6B7280' }}>
+              <View className="flex-col ">
+                <Text 
+                className="font-semibold text-black pb-1"
+                style={{ textDecorationLine: selectedTodoIds.includes(item.id) ? 'line-through' : 'none' }}
+                >{item.text}</Text>
+                <Text>
                   {item.descripe}
                 </Text>
               </View>
@@ -88,7 +94,7 @@ export default function TodoScreen() {
               <View className="flex-row ">
                 <SelectedButton 
                   onPress={() => handleButtonPress(item.id)} 
-                  isSelected={selectedTodoId === item.id}
+                  isSelected={selectedTodoIds.includes(item.id)}
                 />
                 <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />  
               </View>

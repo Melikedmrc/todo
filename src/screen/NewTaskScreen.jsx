@@ -19,7 +19,7 @@ const NewTaskScreen = () => {
                 id: Date.now().toString(),
                 text: todo,
                 descripe: descripe,
-                color: selectedColor, // Seçilen rengi todo'ya ekliyoruz.
+                color: selectedColor || '#FFFFFF', // Seçilen rengi todo'ya ekliyoruz.
             }));
             navigation.navigate('Todo');
             setTodo('');

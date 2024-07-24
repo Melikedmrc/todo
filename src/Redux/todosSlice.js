@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Başlangıç durumu tanımlandı.
 const initialState = {
   todos: [], 
-  selectedColor: '#FFFFFF', // Varsayılan renk
+  selectedColor: 'bg-white', // Varsayılan renk
 };
 
 // Todo Slice oluşturuldu.

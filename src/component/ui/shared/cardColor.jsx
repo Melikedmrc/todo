@@ -17,7 +17,7 @@ const colors = [
 const ColorItem = ({ color, isSelected, onPress }) => (
   <TouchableOpacity onPress={() => onPress(color)}>
     <View
-      className={`h-8 w-8 m-2 p-1 rounded-2xl border-2 border-white ${isSelected ? 'border-gray-700' : ''}`}
+      className={`h-8 w-8 m-2 p-1 rounded-full border-2 ${isSelected ? 'border-gray-500' : 'border-white'}`}
       style={{ backgroundColor: color }}
     />
   </TouchableOpacity>
