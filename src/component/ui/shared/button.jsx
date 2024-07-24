@@ -56,3 +56,14 @@ export const RemoveButton = ({ onPress }) => {
     </TouchableOpacity>
   );
 };
+
+export const AddButton = ({ onPress }) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      className="bg-white w-11 h-11 rounded-full shadow-xl items-center justify-center"
+    >
+      <Text className="text-black text-sm">Add</Text>
+    </TouchableOpacity>
+  );
+};

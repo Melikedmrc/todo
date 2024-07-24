@@ -22,10 +22,21 @@ const todosSlice = createSlice({
     // Seçilen rengi güncellemek için bir reducer oluşturuyoruz
     setSelectedColor: (state, action) => {
       state.selectedColor = action.payload; // Seçilen rengi güncelliyoruz
-    }
+    },
+    setSelectedCycle: (state, action) => {
+      state.selectedCycle = action.payload;
+    },
+    addSelectedTag: (state, action) => {
+      if (!state.selectedTags.includes(action.payload)) {
+        state.selectedTags.push(action.payload);
+      }
+    },
+    removeSelectedTag: (state, action) => {
+      state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
+    },
   },
 });
 
 // Action'ları ve reducer'ı dışa aktarıyoruz
-export const { addTodo, removeTodo, setSelectedColor } = todosSlice.actions;
+export const { addTodo, removeTodo, setSelectedColor,setSelectedCycle, addSelectedTag,removeSelectedTag} = todosSlice.actions;
 export default todosSlice.reducer;

@@ -43,7 +43,7 @@ export default function TodoScreen() {
 
   return (
     <View className="flex-1 flex-col h-full w-full">
-      <View className="bg-purple-300 items-center py-4">
+      <View className="bg-purple-200 items-center py-4">
         <Text className="text-lg font-bold text-black text-center mt-6 mb-2">Today</Text>
         <FlatList
           horizontal
@@ -53,7 +53,7 @@ export default function TodoScreen() {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity>
-              <View style={{ width: itemWidth }} className="items-center bg-fuchsia-200 rounded-xl m-1 py-2">
+              <View style={{ width: itemWidth }} className="items-center bg-purple-300 rounded-xl m-1 py-2">
                 <Text className="text-black text-base">{item.dayName}</Text>
                 <Text className="text-black text-center mt-1.5 py-1 text-base bg-white h-8 w-8 rounded-3xl">
                   {item.dayOfMonth}
@@ -63,16 +63,16 @@ export default function TodoScreen() {
           )}
         />
       </View>
-      
-      <View className="flex-1">  
-        <View className="flex-row justify-center my-4">
-          <TouchableOpacity className="bg-slate-300 px-6 py-2.5 rounded-xl">
+
+      <View className="flex-1">
+        <View className="flex-row items-center justify-center my-4">
+          <TouchableOpacity className="bg-white 0 px-6 rounded-xl h-9 items-center justify-center border-slate-200 border-2">
             <Text className="text-zinc-400">All</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-slate-300 px-3 py-2.5 mx-1 rounded-xl">
+          <TouchableOpacity className="bg-white px-3 mx-1 rounded-xl h-9 items-center justify-center border-slate-200 border-2">
             <Text className="text-zinc-400">Daily Routine</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-slate-300 px-2 py-2.5 rounded-xl">
+          <TouchableOpacity className="bg-white px-2  rounded-xl h-9 items-center justify-center border-slate-200 border-2 ">
             <Text className="text-zinc-400">Study Routine</Text>
           </TouchableOpacity>
         </View>
@@ -80,25 +80,35 @@ export default function TodoScreen() {
           data={todos}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <View className="flex-row justify-between items-center p-4 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
-              <View className="flex-col ">
-                <Text 
-                className="font-semibold text-black pb-1"
-                style={{ textDecorationLine: selectedTodoIds.includes(item.id) ? 'line-through' : 'none' }}
-                >{item.text}</Text>
-                <Text>
-                  {item.descripe}
+            <View className="flex-row justify-between items-center p-2 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
+              <View className="flex-col">
+                <Text
+                  className="font-semibold text-black pb-1"
+                  style={{
+                    textDecorationLine: selectedTodoIds.includes(item.id) ? 'line-through' : 'none',
+                    textAlign: 'center' // Metni ortalar
+                  }}
+                >
+                  {item.text.toUpperCase()}
                 </Text>
+
+                {item.descripe ? (
+                  <View className="flex-row">
+                    <Text className="text-center">
+                      {item.descripe}
+                    </Text>
+                  </View>
+                ) : null}
               </View>
-              
+
               <View className="flex-row ">
-                <SelectedButton 
-                  onPress={() => handleButtonPress(item.id)} 
+                <SelectedButton
+                  onPress={() => handleButtonPress(item.id)}
                   isSelected={selectedTodoIds.includes(item.id)}
                 />
-                <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />  
+                <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />
               </View>
-              
+
             </View>
           )}
         />
