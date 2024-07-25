@@ -73,7 +73,7 @@ export default function Login() {
                 keyExtractor={item => item.id.toString()}
               />
             </View>
-            <View className="mt-10 mb-19">
+            <View className="mt-10 ">
               <Button  title="Login" onPress={handleSubmit(onSubmit)} />
 
                {/* 8. handleSubmit ile form gönderimi kontrol ediliyor. */}

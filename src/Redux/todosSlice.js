@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   todos: [], 
   selectedColor: 'bg-white', // Varsayılan renk
+  selectedRoutine: 'All', 
 };
 
 // Todo Slice oluşturuldu.
@@ -26,17 +27,13 @@ const todosSlice = createSlice({
     setSelectedCycle: (state, action) => {
       state.selectedCycle = action.payload;
     },
-    addSelectedTag: (state, action) => {
-      if (!state.selectedTags.includes(action.payload)) {
-        state.selectedTags.push(action.payload);
-      }
-    },
-    removeSelectedTag: (state, action) => {
-      state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
+    // Seçilen rutini güncellemek için bir reducer ekliyoruz
+    setSelectedRoutine: (state, action) => {
+      state.selectedRoutine = action.payload; // Seçilen rutini güncelliyoruz
     },
   },
 });
 
 // Action'ları ve reducer'ı dışa aktarıyoruz
-export const { addTodo, removeTodo, setSelectedColor,setSelectedCycle, addSelectedTag,removeSelectedTag} = todosSlice.actions;
+export const { addTodo, removeTodo, setSelectedColor,setSelectedCycle,setSelectedRoutine} = todosSlice.actions;
 export default todosSlice.reducer;

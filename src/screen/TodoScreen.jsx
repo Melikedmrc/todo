@@ -3,7 +3,7 @@ import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native
 import BottomTabs from '../component/ui/shared/bottomTabs';
 import { SuggestionButton, SelectedButton, RemoveButton } from "../component/ui/shared/button";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTodo } from "../Redux/todosSlice";
+import { removeTodo, setSelectedRoutine } from "../Redux/todosSlice";
 
 const getCurrentWeek = () => {
   const today = new Date();
@@ -28,6 +28,7 @@ export default function TodoScreen() {
   const itemWidth = screenWidth / 9;
   const dispatch = useDispatch();
   const [selectedTodoIds, setSelectedTodoIds] = useState([]);
+  const selectedRoutine = useSelector((state) => state.todos.selectedRoutine);
 
   const handleRemoveTodo = (id) => {
     dispatch(removeTodo(id));
@@ -40,6 +41,10 @@ export default function TodoScreen() {
         : [...prevSelectedTodoIds, id]
     );
   };
+
+  const filteredTodos = selectedRoutine === 'All'
+    ? todos
+    : todos.filter(todo => todo.repeat === selectedRoutine);
 
   return (
     <View className="flex-1 flex-col h-full w-full">
@@ -66,49 +71,57 @@ export default function TodoScreen() {
 
       <View className="flex-1">
         <View className="flex-row items-center justify-center my-4">
-          <TouchableOpacity className="bg-white 0 px-6 rounded-xl h-9 items-center justify-center border-slate-200 border-2">
+          <TouchableOpacity
+            className={`bg-white px-6 rounded-xl h-9 items-center justify-center border-slate-200 border-2 ${selectedRoutine === 'All' ? 'bg-blue-300' : ''}`}
+            onPress={() => dispatch(setSelectedRoutine('All'))}
+          >
             <Text className="text-zinc-400">All</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-white px-3 mx-1 rounded-xl h-9 items-center justify-center border-slate-200 border-2">
+          <TouchableOpacity
+            className={`bg-white px-3 mx-1 rounded-xl h-9 items-center justify-center border-slate-200 border-2 ${selectedRoutine === 'Daily Routine' ? 'bg-blue-300' : ''}`}
+            onPress={() => dispatch(setSelectedRoutine('Daily Routine'))}
+          >
             <Text className="text-zinc-400">Daily Routine</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-white px-2  rounded-xl h-9 items-center justify-center border-slate-200 border-2 ">
+          <TouchableOpacity
+            className={`bg-white px-3 mx-1 rounded-xl h-9 items-center justify-center border-slate-200 border-2 ${selectedRoutine === 'Study Routine' ? 'bg-blue-300' : ''}`}
+            onPress={() => dispatch(setSelectedRoutine('Study Routine'))}
+          >
             <Text className="text-zinc-400">Study Routine</Text>
           </TouchableOpacity>
         </View>
         <FlatList
-          data={todos}
-          keyExtractor={(item) => item.id}
+          data={filteredTodos}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View className="flex-row justify-between items-center p-2 m-2 rounded-lg" style={{ backgroundColor: item.color }}>
               <View className="flex-col">
                 <Text
-                  className="font-semibold text-black pb-1"
+                  className="font-semibold text-black pb-1 pl-1"
                   style={{
                     textDecorationLine: selectedTodoIds.includes(item.id) ? 'line-through' : 'none',
-                    textAlign: 'center' // Metni ortalar
+                    textAlign: 'center'
                   }}
                 >
-                  {item.text.toUpperCase()}
+                  {item.emoji} {item.text.toUpperCase()}
                 </Text>
 
                 {item.descripe ? (
                   <View className="flex-row">
-                    <Text className="text-center">
+                    <Text className="text-center pl-1">
                       {item.descripe}
                     </Text>
                   </View>
                 ) : null}
               </View>
 
-              <View className="flex-row ">
+              <View className="flex-row">
                 <SelectedButton
                   onPress={() => handleButtonPress(item.id)}
                   isSelected={selectedTodoIds.includes(item.id)}
                 />
                 <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />
               </View>
-
             </View>
           )}
         />
