@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList } from 'react-native';
+import { ImageBackground, Text, View, KeyboardAvoidingView, FlatList ,SafeAreaView } from 'react-native';
 import { Input, Button, Or, SocialAuthButtons} from '../shared/sharedImport';
 import  BottomTabs  from "../shared/bottomTabs";
 import { loginForm } from '../../../utils/authForms';
@@ -29,7 +29,7 @@ export default function Login() {
   };
 
   return (
-    <View className="flex-1">
+    <SafeAreaView  className="flex-1">
       <ImageBackground
         source={LoginBackground}
         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
@@ -38,8 +38,8 @@ export default function Login() {
         <KeyboardAvoidingView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} behavior="padding">
           <View className="items-center justify-center w-full px-5">
             <View className="items-center justify-center">
-              <Text className="text-2xl text-Title mb-2">Log in to HabitHUB</Text>
-              <Text className="text-lg text-{#1D2220} mb-4" style={{ textAlign: 'center' }}>
+              <Text className="text-2xl font-bold text-Title mb-2">Log in to HabitHUB</Text>
+              <Text className="text-lg font-light text-{#1D2220} mb-8" style={{ textAlign: 'center' }}>
                 Welcome back! Sign in using your social account or email to continue ussss
               </Text>
             </View>
@@ -73,8 +73,8 @@ export default function Login() {
                 keyExtractor={item => item.id.toString()}
               />
             </View>
-            <View>
-              <Button title="Login" onPress={handleSubmit(onSubmit)} />
+            <View className="mt-10 mb-19">
+              <Button  title="Login" onPress={handleSubmit(onSubmit)} />
 
                {/* 8. handleSubmit ile form gönderimi kontrol ediliyor. */}
             </View>
@@ -84,6 +84,6 @@ export default function Login() {
       </ImageBackground>
       
       
-    </View>
+    </SafeAreaView>
   );
 }

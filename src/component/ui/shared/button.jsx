@@ -10,9 +10,9 @@ const Button = ({ title, onPress, style, textStyle }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`bg-Button w-44 h-11 rounded-lg shadow-xl shadow-slate-800 items-center justify-center ${style}`}
+      className={`bg-Button w-215 h-60 rounded-lg shadow-xl shadow-slate-800 items-center justify-center ${style}`}
     >
-      <Text className={`text-slate-950 text-lg ${textStyle}`}>{title}</Text>
+      <Text className={`text-slate-950 text-2xl font-medium ${textStyle}`}>{title}</Text>
     </TouchableOpacity>
   );
 };

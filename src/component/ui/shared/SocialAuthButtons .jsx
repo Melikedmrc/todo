@@ -4,7 +4,7 @@ import { signInWithGoogle } from "../../../firebase/firebaseConfig";
 
 export default function SocialAuthButtons() {
     return (
-            <View className="flex-row justify-center gap-5">
+            <View className="flex-row justify-center gap-5 mb-8">
                 <TouchableOpacity >
                     <View>
                         <Image source={require("../../../../assets/icon/facebook.png")} />
