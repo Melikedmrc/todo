@@ -9,24 +9,24 @@ export default function ProfileScreen() {
   };
 
   return (
-    <View className="flex-1 bg-violet-200">
+    <View className="flex-1 bg-CustomPink">
       <View className="mt-12 items-center justify-center">
-        <Text className="text-lg font-semibold">Profile</Text>
+        <Text className="text-lg -mb-6 font-medium">Profile</Text>
         <View className="m-5 p-5 w-full">
           <TouchableOpacity onPress={() => handlePress('Account')}>
-            <Text className="text-xl bg-slate-100 p-4 my-2 rounded-xl">Account</Text>
+            <Text className="text-xl font-bold text-Placeholder bg-slate-100 p-4 my-2 rounded-xl">Account</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handlePress('Notifications')}>
-            <Text className="text-xl bg-slate-100 p-4 my-2 rounded-xl">Notifications</Text>
+            <Text className="text-xl font-bold text-Placeholder bg-slate-100 p-4 my-2 rounded-xl">Notifications</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handlePress('Help')}>
-            <Text className="text-xl bg-slate-100 p-4 my-2 rounded-xl">Help</Text>
+            <Text className="text-xl font-bold text-Placeholder bg-slate-100 p-4 my-2 rounded-xl">Help</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handlePress('Storage and Data')}>
-            <Text className="text-xl bg-slate-100 p-4 my-2 rounded-xl">Storage and Data</Text>
+            <Text className="text-xl font-bold text-Placeholder bg-slate-100 p-4 my-2 rounded-xl">Storage and Data</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handlePress('Logout')}>
-            <Text className="text-xl bg-slate-100 p-4 my-2 rounded-xl">Logout</Text>
+            <Text className="text-xl font-bold text-Placeholder bg-slate-100 p-4 my-2 rounded-xl">Logout</Text>
           </TouchableOpacity>
         </View>
       </View>

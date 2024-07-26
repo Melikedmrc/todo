@@ -27,10 +27,10 @@ export default function HomeScreen({ navigation }) {
         <View className="flex-1 justify-center items-center">
           <Button title="Login" onPress={() => navigation.navigate('Login')} />
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text className="font-light mt-2 mb-5 border-b-0.5 border-Placeholder">Create an account</Text>
+            <Text className="font-light mt-2 mb-5 underline">Create an account</Text>
           </TouchableOpacity>
           <Or/>
-          <SocialAuthButtons />
+          <SocialAuthButtons className="" />
         </View>
       </View>
     </ImageBackground>

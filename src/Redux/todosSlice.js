@@ -5,6 +5,9 @@ const initialState = {
   todos: [], 
   selectedColor: 'bg-white', // Varsayılan renk
   selectedRoutine: 'All', 
+  selectedCycle: 'Daily', 
+  selectedDays: [],
+  
 };
 
 // Todo Slice oluşturuldu.
@@ -31,9 +34,12 @@ const todosSlice = createSlice({
     setSelectedRoutine: (state, action) => {
       state.selectedRoutine = action.payload; // Seçilen rutini güncelliyoruz
     },
+    setSelectedDays(state, action) {
+      state.selectedDays = Array.isArray(action.payload) ? action.payload : [];
+    },
   },
 });
 
 // Action'ları ve reducer'ı dışa aktarıyoruz
-export const { addTodo, removeTodo, setSelectedColor,setSelectedCycle,setSelectedRoutine} = todosSlice.actions;
+export const { addTodo, removeTodo, setSelectedColor, setSelectedCycle, setSelectedRoutine, setSelectedDays } = todosSlice.actions;
 export default todosSlice.reducer;

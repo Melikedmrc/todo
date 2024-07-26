@@ -6,7 +6,7 @@ export default function Input({ placeholder, secureTextEntry, onChangeText, onBl
     <View className="w-full justify-center items-center">
       <View className="h-14 w-96 bg-Input rounded-2xl justify-center p-4">
         <TextInput
-          className="h-7 w-full text-xs border-b-0.5 border-Placeholder"
+          className="h-7 w-full text-xs border-b-0.5 border-custom-border"
           style={{ lineHeight: 15 }}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}

@@ -1,6 +1,7 @@
 import React , {useState}from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styled } from 'nativewind'; // NativeWind stil sınıfları için
@@ -38,9 +39,9 @@ export const SelectedButton = ({ onPress, isSelected }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="w-8 h-8 rounded-2xl bg-gray-200 items-center justify-center mr-3"
+      className="w-6 h-6 rounded-2xl border-2 border-gray-300 bg-gray-100 items-center justify-center mr-3"
     >
-      {isSelected && <Feather name="check" size={24} color="black" />}
+      {isSelected && <Feather name="check" size={18} color="black" />}
     </TouchableOpacity>
   );
 };
@@ -50,9 +51,9 @@ export const RemoveButton = ({ onPress }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="h-8 w-8 rounded-2xl bg-slate-600 items-center justify-center"
+      className="h-6 w-6    items-center justify-center"
     >
-      <EvilIcons name="trash" size={24} color="white" style={{ bottom:2}} />
+      <MaterialIcons  name="delete" size={24} color="black" style={{ bottom:1}} />
     </TouchableOpacity>
   );
 };
@@ -64,6 +65,17 @@ export const AddButton = ({ onPress }) => {
       className="bg-white w-11 h-11 rounded-full shadow-xl items-center justify-center"
     >
       <Text className="text-black text-sm">Add</Text>
+    </TouchableOpacity>
+  );
+};
+
+export const AddMore = ({ onPress }) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      className="bg-Button w-144 h-60 rounded-lg shadow-xl shadow-slate-800 items-center justify-center"
+    >
+      <Text className="text-black text-base font-medium">Add More</Text>
     </TouchableOpacity>
   );
 };

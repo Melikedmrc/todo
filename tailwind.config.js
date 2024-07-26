@@ -8,24 +8,31 @@ module.exports = {
     extend: {
       colors: {
       'Input': '#FDFDFD',
-      'Placeholder': '#1E1C1C80',
+      'Placeholder': '#1E1C1C',
       'Title': '#C67ED2',
       'BottomNav': '#C67ED2',
       'Button': '#F6F6F6',
-      'Pink':'f3c4fb',
+      'PinkColor':'#f3c4fb',
+      'PinkSecond':'#DEB5E4',
+      'CustomPink': '#F4D8F9',
+      'Purple':'#BA68C8',
       'White': '#F5F5F5',
       'Blue': '#bde0fe',
+      'BlueSecond': '#ABDDF4',
       'Orange': '#FFC09F',
       'Yellow': '#FFEE93',
       'LightYellow': '#FCF5C7',
       'Green': '#ADF7B6',
+      'GreenSecond':'#D9D9D',
       'Or':'#797C7B',
-      'Line': '#CDD1D0'
+      'Line': '#CDD1D0',
+      'custom-border': '#1e1c1c'
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
       width: {
+        '144': '144px',
         '215': '215px',
         '85': '85'
       },
@@ -37,6 +44,7 @@ module.exports = {
         '1': '1px',
         '0.25': '0.25px',
       },
+      
 
     },
   },

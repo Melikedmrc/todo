@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedColor } from "../../../Redux/todosSlice";
 
 const colors = [
-  '#FFB3BA', // Pembe
-  '#FFDFBA', // Turuncu
-  '#FFFFBA', // Sarı
-  '#BAFFC9', // Açık Yeşil
-  '#BAE1FF', // Açık Mavi
-  '#D4A5A5', // Soft Kırmızı
-  '#A5D4D4', // Soft Turkuaz
-  '#D4A5D4'  // Soft Mor
+  '#ADF7B6', // Pembe
+  '#BA68C8', // Turuncu
+  '#FFC09F', // Sarı
+  '#8FFFF8', // Açık Yeşil
+  '#CC2222', // Açık Mavi
+  '#FBF1BA', // Soft Kırmızı
+  '#7075E5', // Soft Turkuaz
+  '#FF36F7'  // Soft Mor
 ];
 
 const ColorItem = ({ color, isSelected, onPress }) => (
@@ -35,7 +35,7 @@ const CardColor = () => {
 
   return (
     <View>
-      <Text className="text-base font-bold px-5">Card Color</Text>
+      <Text className="text-base font-bold px-3">Card Color</Text>
       <View className="flex-1 justify-center items-center">
         <FlatList
           data={colors}
