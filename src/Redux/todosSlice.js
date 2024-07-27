@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Başlangıç durumu tanımlandı.
 const initialState = {
   todos: [], 
-  selectedColor: 'bg-white', // Varsayılan renk
+  selectedColor: 'bg-white',
   selectedRoutine: 'All', 
   selectedCycle: 'Daily', 
   selectedDays: [],

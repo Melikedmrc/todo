@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedColor } from "../../../Redux/todosSlice";
 
 const colors = [
-  '#ADF7B6', // Pembe
-  '#BA68C8', // Turuncu
-  '#FFC09F', // Sarı
-  '#8FFFF8', // Açık Yeşil
-  '#CC2222', // Açık Mavi
-  '#FBF1BA', // Soft Kırmızı
-  '#7075E5', // Soft Turkuaz
-  '#FF36F7'  // Soft Mor
+  '#ADF7B6',
+  '#BA68C8',
+  '#FFC09F', 
+  '#8FFFF8', 
+  '#CC2222',
+  '#FBF1BA', 
+  '#7075E5', 
+  '#FF36F7'  
 ];
 
 const ColorItem = ({ color, isSelected, onPress }) => (

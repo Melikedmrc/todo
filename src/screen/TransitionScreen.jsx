@@ -8,12 +8,11 @@ export default function Transition() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // 5 saniye bekledikten sonra yönlendirme yap
     const timer = setTimeout(() => {
-      navigation.navigate('Todo'); // Ana sayfaya yönlendirme
-    }, 1000); // 5 saniye = 5000 ms
+      navigation.navigate('Todo'); 
+    }, 1000); 
 
-    // Cleanup: Eğer bu bileşen çıkarsa, zamanlayıcıyı temizle
+    
     return () => clearTimeout(timer);
   }, [navigation]);
 

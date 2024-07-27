@@ -3,12 +3,30 @@ import { View, Text, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import BottomTabs from '../component/ui/shared/bottomTabs';
 import { Calendar } from 'react-native-calendars';
-import { setSelectedRoutine, setSelectedDays } from "../Redux/todosSlice";
+import { SuggestionButton,SelectedButton, RemoveButton } from "../component/ui/shared/button";
+import { removeTodo } from "../Redux/todosSlice";
 
 const getDayNameFromDate = (dateStr) => {
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', { weekday: 'short' });
 };
+
+const renderTodoItemWithDate = ({ item, selectedTodoIds, handleButtonPress, handleRemoveTodo }) => (
+  <View className="flex-col justify-start items-start h-14 w-full p-3 my-1 rounded-lg bg-custom-blue">
+    <View className="flex-row justify-between w-full">
+      <Text className="font-semibold text-base text-black pb-0 pl-1">{item.emoji} {item.text}</Text>
+      <View className="flex-row">
+        <SelectedButton
+          onPress={() => handleButtonPress(item.id)}
+          isSelected={selectedTodoIds.includes(item.id)}
+        />
+        <RemoveButton title="Remove" onPress={() => handleRemoveTodo(item.id)} />
+      </View>
+    </View>
+    {/* <Text className="text-sm">{item.date}</Text> */}
+    {item.descripe ? <Text className="text-center pl-7">{item.descripe}</Text> : null}
+  </View>
+);
 
 export default function CalendarScreen({ isLogin }) {
   const [selectedDate, setSelectedDate] = useState('');
@@ -16,6 +34,11 @@ export default function CalendarScreen({ isLogin }) {
   const selectedRoutine = useSelector((state) => state.todos.selectedRoutine);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const dispatch = useDispatch();
+  const [selectedTodoIds, setSelectedTodoIds] = useState([]);
+
+  const handleRemoveTodo = (id) => {
+    dispatch(removeTodo(id));
+  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -37,6 +60,14 @@ export default function CalendarScreen({ isLogin }) {
     setSelectedDate(day.dateString);
   };
 
+  const handleButtonPress = (id) => {
+    setSelectedTodoIds((prevSelectedTodoIds) =>
+      prevSelectedTodoIds.includes(id)
+        ? prevSelectedTodoIds.filter(todoId => todoId !== id)
+        : [...prevSelectedTodoIds, id]
+    );
+  };
+
   return (
     <View className="flex-1 bg-Blue">
       <View className="items-center justify-start mt-10">
@@ -49,43 +80,29 @@ export default function CalendarScreen({ isLogin }) {
           <Calendar
             onDayPress={onDayPress}
             markedDates={{
-              [selectedDate]: { selected: true, marked: true, selectedColor: '#00BFFF', selectedTextColor: 'white' }
+              [selectedDate]: { selected: true, marked: true, selectedColor: '#9bcefa', selectedTextColor: 'white' }
             }}
           />
         </View>
       </View>
 
-      {/* Seçilen günün TODO'ları  HATALI DÜZELT */}
+      {/* Todos Listesi */}
       <View className="flex-1 p-5 -mt-36">
-        {selectedDate ? (
-          <>
-            <Text className="text-lg font-bold mb-3">Todos for {selectedDate}</Text>
-            <FlatList
-              data={filteredTodos}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <View className="bg-slate-200 p-4 mb-2 rounded-lg">
-                  <Text className="text-lg font-semibold">{item.emoji} {item.text}</Text>
-                  {item.descripe ? <Text className="text-gray-600">{item.descripe}</Text> : null}
-                </View>
-              )}
-              ListEmptyComponent={<Text className="text-gray-500 text-center">No todos for this date</Text>}
-            />
-          </>
-        ) : (
-          <FlatList
-            data={todos}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <View className="bg-gray-100 p-4 mb-2 rounded-lg">
-                <Text className="text-lg font-semibold">{item.emoji} {item.text}</Text>
-                {item.descripe ? <Text className="text-gray-600">{item.descripe}</Text> : null}
-              </View>
-            )}
-          />
-        )}
+        <FlatList
+          data={selectedDate ? filteredTodos : todos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={(props) => renderTodoItemWithDate({
+            ...props,
+            selectedTodoIds,
+            handleButtonPress,
+            handleRemoveTodo
+          })}
+          ListEmptyComponent={<Text className="text-gray-500 text-center">No todos for this date</Text>}
+        />
       </View>
-
+      <View className="absolute right-4 bottom-16 mb-5">
+          <SuggestionButton onPress={() => console.log('Button Pressed')} />
+        </View>
       <View className="absolute bottom-0 w-full">
         <BottomTabs isLogin={isLogin} />
       </View>

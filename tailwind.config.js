@@ -26,7 +26,8 @@ module.exports = {
       'GreenSecond':'#D9D9D',
       'Or':'#797C7B',
       'Line': '#CDD1D0',
-      'custom-border': '#1e1c1c'
+      'custom-border': '#1e1c1c',
+      'custom-blue': '#D7ECFE',
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
@@ -34,7 +35,7 @@ module.exports = {
       width: {
         '144': '144px',
         '215': '215px',
-        '85': '85'
+        '85': '85px'
       },
       height: {
         '60': '60px',
