@@ -29,7 +29,7 @@ export const SuggestionButton = ({ onPress }) => {
       onPress={() => navigation.navigate('Suggestion')}
       className="bg-white w-12 h-12 rounded-full items-center justify-center"
     >
-      
+
       <Text className="text-black text-xl">+</Text>
     </TouchableOpacity>
   );

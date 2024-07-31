@@ -7,6 +7,7 @@ import { CardColor, Repeat, BottomTabs } from "../component/ui/shared/sharedImpo
 import { AddButton } from '../component/ui/shared/button';
 import { useNavigation } from '@react-navigation/native';
 
+
 const NewTaskScreen = () => {
     const [todo, setTodo] = useState('');
     const [descripe, setDescripe] = useState('');
@@ -24,7 +25,7 @@ const NewTaskScreen = () => {
             const date = today.toISOString().split('T')[0]; // YYYY-MM-DD formatında tarih
     
             const newTodo = {
-                id: Date.now().toString(),
+                id: Date.now(),
                 text: todo,
                 descripe: descripe,
                 color: selectedColor || '#FFFFFF',

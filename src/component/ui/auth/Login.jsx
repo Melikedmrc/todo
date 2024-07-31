@@ -4,7 +4,7 @@ import { Input, Button, Or, SocialAuthButtons} from '../shared/sharedImport';
 import  BottomTabs  from "../shared/bottomTabs";
 import { loginForm } from '../../../utils/authForms';
 import { useForm, Controller } from 'react-hook-form';// 1. React Hook Form'dan gerekli bileşenleri eklendi
-import { NavigationContainer, useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native'; 
 import { auth, signInWithEmail } from '../../../firebase/firebaseConfig';
 
 const LoginBackground = require('../../../../assets/login.png');

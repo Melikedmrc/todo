@@ -9,7 +9,7 @@ import { removeTodo, setSelectedRoutine, setSelectedDays } from "../Redux/todosS
 const todoBackground = require('../../assets/todoBackground.png');
 
 const getCurrentWeek = () => {
-  const today = new Date();
+  const today = new Date(); //Bugünün tarihi
   const weekDays = [];
 
   for (let i = 0; i < 7; i++) {
